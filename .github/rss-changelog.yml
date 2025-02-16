@@ -1,0 +1,30 @@
+name: Post GitHub Changelog to Webex
+
+on:
+  # Run every hour (example). Adjust as needed.
+  schedule:
+    - cron: '0 * * * *'
+  # Manual trigger for testing
+  workflow_dispatch:
+
+jobs:
+  post_changelog:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install requests feedparser
+
+      - name: Run the RSS to Webex script
+        run: python github_changelog_webex.py
+        env:
+          WEBEX_BOT_TOKEN: ${{ secrets.WEBEX_BOT_TOKEN }}
+          WEBEX_ROOM_ID: ${{ secrets.WEBEX_ROOM_ID }}
