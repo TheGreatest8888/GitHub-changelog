@@ -14,7 +14,7 @@ RSS_FEED_URL = "https://github.blog/changelog/feed/"
 
 # Time window (in seconds); if the item is older than this, skip it.
 # Example: 3600 seconds = 1 hour
-TIME_WINDOW_SECONDS = 259200
+TIME_WINDOW_SECONDS = 3600
 
 def send_message_to_webex(title: str, markdown_msg: str) -> bool:
     """
